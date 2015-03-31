@@ -1,3 +1,5 @@
+#![feature(custom_derive)]
+
 //extern crate time;
 //use std::env;
 //use time::now;
@@ -14,13 +16,27 @@ pub mod traits;
 use traits::Formattable;
 
 impl traits::Formattable for i32 {
-	fn format(&self) -> &str {
-		*self.to_string().as_slice()
+	fn format(&self) -> String {
+		self.to_string()
+	}
+}
+
+#[derive(Debug)]
+struct Person {
+    name: String,
+    age: i8
+}
+
+impl Formattable for Person {
+	fn format(&self) -> String {
+		format!("Person: Name = {}, Age = {}", self.name, self.age)
 	}
 }
 
 fn main() {
-	println!("{}", 1.format());
+	println!("1 = {}", 1.format());
+	let p = Person { name: "zai".to_string(), age: 41i8 };
+	println!("{:?} = {}", p, p.format());
 
 	// let start = now();
 	// for n in 0..40 {

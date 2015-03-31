@@ -1,3 +1,3 @@
 pub trait Formattable {
-	fn format(&self) -> &str;
+	fn format(&self) -> String;
 }
