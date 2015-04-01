@@ -12,6 +12,7 @@
 // }
 
 pub mod traits;
+pub mod consequtive_ints;
 
 use traits::Formattable;
 
@@ -31,6 +32,10 @@ impl Formattable for Person {
 	fn format(&self) -> String {
 		format!("Person: Name = {}, Age = {}", self.name, self.age)
 	}
+}
+
+macro_rules! monad {
+	(let! ($l: expr) = ($r: expr)) => (println!("{} = {}", $l, $r));
 }
 
 fn main() {
