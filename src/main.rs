@@ -6,6 +6,7 @@
 //use time::now;
 
 pub mod traits;
+pub mod consequtive_ints;
 pub mod fib;
 
 use traits::Formattable;
@@ -29,6 +30,9 @@ impl traits::Formattable for i32 {
 // 		format!("Person: Name = {}, Age = {}", self.name, self.age)
 // 	}
 // }
+
+macro_rules! monad {
+	(let! ($l: expr) = ($r: expr)) => (println!("{} = {}", $l, $r));
 
 fn main() {
 	let f = Future::spawn(move|| { 0 });
