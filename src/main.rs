@@ -1,67 +1,31 @@
-#![feature(custom_derive)]
+//#![feature(custom_derive)]
 #![feature(std_misc)]
 
-//extern crate time;
-//use std::env;
-//use time::now;
+//pub mod consequtive_ints;
+use std::fmt::Debug;
 
-pub mod traits;
-pub mod consequtive_ints;
-pub mod fib;
+mod fib;
 
-use traits::Formattable;
-//use std::thread;
-use std::sync::*;
-
-impl traits::Formattable for i32 {
-	fn format(&self) -> String {
-		self.to_string()
-	}
-}
-
-//#[derive(Debug)]
-// struct Person {
-//     name: String,
-//     age: i8
+// fn print_array_by_ref<T: Debug>(xs: &[T]) {
+// 	for x in xs.iter() {
+// 		println!("{:?}", x)
+// 	}
 // }
-
-// impl Formattable for Person {
-// 	fn format(&self) -> String {
-// 		format!("Person: Name = {}, Age = {}", self.name, self.age)
+//
+// fn print_boxed_array<T: Debug>(xs: Box<[T]>) {
+// 	for x in xs.iter() {
+// 		println!("{:?}", x)
 // 	}
 // }
 
-macro_rules! monad {
-	(let! ($l: expr) = ($r: expr)) => (println!("{} = {}", $l, $r));
-
 fn main() {
-	let f = Future::spawn(move|| { 0 });
+	let n = 30;
+	println!("fib({}) = {}", n, fib::fib(n).get());
 
-
-
-	//println!("1 = {}", 1.format());
-	//let p = Person { name: "zai".to_string(), age: 41i8 };
-	//println!("{:?} = {}", p, p.format());
-
-	// let start = now();
-	// for n in 0..40 {
-	// 	println!("fib ({}) = {}", n, fib(n));
-	// }
-	// println!("Done in {}", now() - start);
+	// let a = [1, 2, 3];
+	// print_array_by_ref(&a);
+	//
+	// let b = Box::new(a);
+	// print_boxed_array(b);
+	// print_array_by_ref(&a);
 }
-
-// fn main() {
-// 	match env::args().nth(1) {
-// 		Some(n) =>
-// 			match n.parse::<i32>() {
-// 				Ok(n) =>
-// 					let start = time::now();
-// 					for n in 1..40 {
-// 						println!("fib ({}) = {}", n, fib(n));
-// 					}
-// 					let elapsed = time::now() - start;
-// 					println!("Done in {}", elapsed);
-// 				_ => print
-// 		}
-// 	} 
-// }
