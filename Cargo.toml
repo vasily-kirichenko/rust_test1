@@ -5,6 +5,8 @@ authors = ["Vasily Kirichenko <vaskir@gmail.com>"]
 
 [dependencies]
 time = "*"
+rust-crypto = "*"
+getopts = "*"
 
 [[bin]]
 name = "rust_test1"

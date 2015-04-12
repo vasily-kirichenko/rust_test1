@@ -1,0 +1,42 @@
+//#![feature(custom_derive)]
+//#![feature(std_misc)]
+//#![feature(test)]
+
+//pub mod consequtive_ints;
+//use std::fmt::Debug;
+
+//mod fib;
+
+extern crate crypto;
+extern crate time;
+
+use crypto::sha1::*;
+use crypto::digest::Digest;
+use time::now;
+
+fn main() {
+	let n = 100;
+	let input = Box::new([0u8; 10000000]);
+	let mut out = [0u8; 20];
+	let started = time::now();
+	for _ in 1..n {
+		let mut sha1 = Sha1::new();
+		sha1.input(input. get());
+		sha1.result(&mut out);
+	}
+	let elapsed = time::now() - started;
+	println!("Sha1 of an array of lenght = {} is {:?}, elapled {}",
+			 input.len(), out, elapsed);
+
+	//let n = 30;
+	//println!("fib({}) = {}", n, fib::fib(n).get());
+
+	//println!("");
+
+	// let a = [1, 2, 3];
+	// print_array_by_ref(&a);
+	//
+	// let b = Box::new(a);
+	// print_boxed_array(b);
+	// print_array_by_ref(&a);
+}
