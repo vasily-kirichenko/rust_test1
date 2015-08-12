@@ -3,10 +3,11 @@ name = "rust_test1"
 version = "0.0.1"
 authors = ["Vasily Kirichenko <vaskir@gmail.com>"]
 
-[dependencies]
-time = "*"
-
 [[bin]]
 name = "rust_test1"
 path = "src/main.rs"
 doc = false
+
+[dependencies]
+num = "*"
+time = "*"

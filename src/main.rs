@@ -1,43 +1,35 @@
-#![feature(custom_derive)]
-#![feature(std_misc)]
+extern crate num;
+extern crate time;
 
-//extern crate time;
-//use std::env;
-//use time::now;
+use num::{Num};
+use time::Duration;
 
-pub mod traits;
-pub mod consequtive_ints;
-pub mod fib;
-
-use traits::Formattable;
-//use std::thread;
-use std::sync::*;
-
-impl traits::Formattable for i32 {
-	fn format(&self) -> String {
-		self.to_string()
-	}
+fn tc<T, F: Fn() -> T>(f: F) -> (T, Duration) {
+	let start = time::now();
+	let res = f();
+	(res, time::now() - start)
 }
 
-//#[derive(Debug)]
-// struct Person {
-//     name: String,
-//     age: i8
-// }
-
-// impl Formattable for Person {
-// 	fn format(&self) -> String {
-// 		format!("Person: Name = {}, Age = {}", self.name, self.age)
-// 	}
-// }
-
-macro_rules! monad {
-	(let! ($l: expr) = ($r: expr)) => (println!("{} = {}", $l, $r));
+fn fib<T: Num + Copy>(n: T) -> T {
+	let zero = T::zero();
+	let one = T::one();
+	if n == zero || n == one { n }
+	else { fib(n - one) + fib(n - one - one) }
+}
 
 fn main() {
-	let f = Future::spawn(move|| { 0 });
+	//let mut f = Future::spawn(move || { 0 });
+	//let value = f.get();
+	//println!("{}", value);
+	// let _ = fib(1i64);
+	// let _ = fib(1i32);
+	// let _ = fib(1u32);
+	let (_, duration) = tc(|| for i in 0..40 { println!("fib({}) = {}", i, fib(i)) });
+	println!("Done in {}", duration);
 
+	// let _ = fib(1f64);
 
+	println!("DONE.");
 
 	//println!("1 = {}", 1.format());
 	//let p = Person { name: "zai".to_string(), age: 41i8 };
@@ -63,5 +55,5 @@ fn main() {
 // 					println!("Done in {}", elapsed);
 // 				_ => print
 // 		}
-// 	} 
+// 	}
 // }
